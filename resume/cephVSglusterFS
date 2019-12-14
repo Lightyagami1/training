@@ -1,0 +1,35 @@
+Glusterfs Vs Ceph Hero Server
+==================
+
+Ceph and Gluster are both systems used for managing distributed storage. Both are considered software-defined storage, meaning they’re largely hardware-agnostic. They organize the bits that make up your data using their own underlying infrastructure, which is what defines this choice: what underlying framework do you want supporting your data?
+
+Object-Based Storage for Unstructured Data: Ceph
+-------------------------------------------------
+
+Ceph is an object-based system, meaning it manages stored data as objects rather than as a file hierarchy, spreading binary data across the cluster. Similar object storage methods are used by Facebook to store images and Dropbox to store client files. In general, object storage supports massive unstructured data, so it’s perfect for large-scale data storage. The system is maintained by a network of daemons in the form of cluster monitors, metadata servers, and journaled storage. These combine to make Ceph capable but more complex than the competition.
+
+The uncommon object and block-based storage means Ceph uses its own tools for managing storage. This requires system administrators to become familiar with Ceph’s tools. The true inner workings of Ceph can be hard to grasp at first glance. Basically, you need to be willing to learn how it works to gain the benefits. The self-managed, self-healing system can reduce ongoing operating expenses over time, and Ceph can run on industry-standard server hardware.
+
+The system can also create block storage, providing access to block device images that can be stripped and replicated across the cluster. Applications can access Ceph Object Storage through a RESTful interface that supports Amazon S3 and Openstack Swift APIs. The goal is high performance, massive storage, and compatibility with legacy code.
+
+Block Storage in Hierarchical Trees: GlusterFS
+----------------------------------------------
+
+GlusterFS, better known as Gluster, is a more traditional file store. It’s easy to set up, and a properly-compiled build can be used on any system that has a folder. The flexibility and ease of use is a major advantage of the system. While it can scale to enormous capacities, performance tends to quickly degrade. It’s best suited for large average file sizes (greater than 4 MB) and sequential access. A cluster can spread across physical, virtual, and cloud servers, allowing for flexible storage virtualization.
+
+Gluster uses block storage, which means chunks of data are stored on open space on connected cluster devices. File and block-based storage uses a file system that arranges files in hierarchical trees. It aggregates geographically distinct servers over Ethernet to create a scalable parallel network file system. Gluster is essentially a cluster-based version of FUSE and NFS, providing a familiar architecture for most system administrators. It’s intended to be simple, maintainable, and widely usable but doesn’t have the speed of access that Ceph can offer under the right circumstances.
+
+Conclusion
+==========
+
+Ceph is best suited toward the rapid access of unstructured data, which constitutes the vast majority of files in the world. Gluster is better for sequential data access, like streaming video, or for applications where speed isn’t as important, like backup.
+
+In simpler terms, Ceph and Gluster both provide powerful storage, but Gluster performs well at higher scales that could multiply from tera to petabytes in a short time. Ceph does provides rapid storage scaling, but the storage format lends itself to shorter-term storage that users access more frequently
+
+Ceph: scalable object storage with block and file capabilities
+
+Gluster: scalable file storage with object capabilities
+
+Ceph uses object storage, which means it stores data in binary objects spread out across lots of computers. It builds a private cloud system with OpenStack technology, and users can mix unstructured and structured data in the same system.
+
+Gluster uses block storage, which stores a set of data in chunks on open space in connected Linux computers. It builds a highly scalable system with access to more traditional storage and file transfer protocols, and can scale quickly and without a single point of failure. That means you can store huge amounts of older data without losing accessibility or security

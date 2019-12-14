@@ -1,0 +1,56 @@
+Open API Initiative : Swagger : contract-first approach
+documentation, client can be generated automatically using swagger.
+
+=======================================================================
+https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design
+REST is independent of any underlying protocol and is not necessarily tied to HTTP. However, most common REST implementations use HTTP
+
+Representational State Transfer (REST)
+
+A well-designed web API should aim to support:
+
+- Platform independence. Any client should be able to call the API, regardless of how the API is implemented internally. This requires using standard protocols, and having a mechanism whereby the client and the web service can agree on the format of the data to exchange.
+
+- Service evolution. The web API should be able to evolve and add functionality independently from client applications. As the API evolves, existing client applications should continue to function without modification. All functionality should be discoverable so that client applications can fully use it.
+Asynchronous operations
+
+Sometimes a POST, PUT, PATCH, or DELETE operation might require processing that takes a while to complete. If you wait for completion before sending a response to the client, it may cause unacceptable latency. If so, consider making the operation asynchronous. Return HTTP status code 202 (Accepted) to indicate the request was accepted for processing but is not completed.
+
+
+
+
+=======================================================================
+
+https://hackernoon.com/restful-api-designing-guidelines-the-best-practices-60e1d954e7c9
+
++ Terminologies
++ API endpoint
++ HTTP methods (verbs) : GET, POST, DELETE, PUT, PATCH
++ Field name casing convention : keep consistent
++ Searching, sorting, filtering and pagination
++ Versioning
+
+The URL should only contain resources(nouns) not actions or verbs(add, delete, update)
+use method GET, POST, DELETE
+use versioning to establish consistency, when breaking changes are introduced helpful.
+
+
+Then what is the correct way?
+/companies endpoint is a good example, which contains no action. But the question is how do we tell the server about the actions to be performed on companies resource viz. whether to add, delete or update?
+
+This is where the HTTP methods (GET, POST, DELETE, PUT), also called as verbs, play the role.
+
+The resource should always be plural in the API endpoint and if we want to access one instance of the resource, we can always pass the id in the URL.
+
+    method GET path /companies should get the list of all companies
+    method GET path /companies/34 should get the detail of company 34
+    method DELETE path /companies/34 should delete company 34
+
+In few other use cases, if we have resources under a resource, e.g Employees of a Company, then few of the sample API endpoints would be:
+
+    GET /companies/3/employees should get the list of all employees from company 3
+    GET /companies/3/employees/45 should get the details of employee 45, which belongs to company 3
+    DELETE /companies/3/employees/45 should delete employee 45, which belongs to company 3
+    POST /companies should create a new company and return the details of the new company created
+
+
